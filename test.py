@@ -18,7 +18,7 @@ def setv(pa, ar):
 		print("Error : You must provide as many names as values")
 
 
-x = cmdline.cmd(desc="This is a test v2.0", title="Terminal",name="root")
-x.addc("echo",echo,desc="Print a string")
-x.addc("set",setv,desc="Assign a value to a variable")
+x = cmdline.cmd()
+#x.addc("echo",echo,desc="Print a string")
+#x.addc("set",setv,desc="Assign a value to a variable")
 x.initsession()

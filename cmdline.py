@@ -3,6 +3,7 @@
 import re
 import datetime
 import pyfiglet
+import colorama
 from termcolor import colored, cprint
 
 
@@ -11,7 +12,7 @@ class cmd:
 	def __init__(self,title="CLI",desc="cli tool (module by @realbacon)",inp="$- ",name="cli"):
 		self.cmd_dic = {}
 		self.locv = {}
-		self.input = colored(str(name),"cyan")+colored(str(inp),'magenta')
+		self.input = str(inp)
 		self.desc = str(desc) 
 		self.title = str(title)
 		self.name = str(name)
@@ -34,6 +35,7 @@ class cmd:
 
 	#Init shell
 	def initsession(self):
+		colorama.init()
 		date = datetime.datetime.now()
 		ascii_b = pyfiglet.figlet_format(self.title)
 		print(ascii_b+'\n'+self.desc)
@@ -44,7 +46,9 @@ class cmd:
 		self.addc("dump",self.retuv,"Return the value of all/one variable")
 		self.addc("dumpc",self.dumpcmd,"Return parameters and arguments")
 		while True:
-			c = input(self.input)
+			cprint(self.name,'cyan',end="")
+			cprint(self.input,'magenta',end="")
+			c = input()
 			self.executec(c)
 
 
@@ -104,12 +108,16 @@ class cmd:
 		if len(a[0]) > 0:
 			na = a[0]
 			if na  in self.cmd_dic:
-				print(f"- Command : {colored(na,'green')}\n    Function : {self.cmd_dic[na][0].__name__}()\n    Description : {self.cmd_dic[na][1]}")					
+				print(f"- Command : ",end="")
+				cprint(na,'green')    
+				print(f"   Function : {self.cmd_dic[na][0].__name__}()\n    Description : {self.cmd_dic[na][1]}")					
 			else:
 				print(f"Error help: Command not found '{na}'.")	
 		else:
 			for i in self.cmd_dic:
-				print(f"- Command : {colored(i,'green')}\n    Function : {self.cmd_dic[i][0].__name__}()\n    Description : {self.cmd_dic[i][1]}")
+				print(f"- Command : ",end="")
+				cprint(i,'green')
+				print(f"Function : {self.cmd_dic[i][0].__name__}()\n    Description : {self.cmd_dic[i][1]}")
 	
 	def quit(self,p,a):
 		print('Exiting shell')
