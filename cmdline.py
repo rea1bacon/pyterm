@@ -45,6 +45,7 @@ class cmd:
 		self.addc("exit",self.quit,"Exit the shell")
 		self.addc("dump",self.retuv,"Return the value of all/one variable")
 		self.addc("dumpc",self.dumpcmd,"Return parameters and arguments")
+		self.addc("set",self.setv,desc="Assign a value to a variable")
 		while True:
 			cprint(self.name,'cyan',end="")
 			cprint(self.input,'magenta',end="")
@@ -126,3 +127,14 @@ class cmd:
 
 	def dumpcmd(self,p,a):
 		print("dumpcmd",p,a)
+
+	def setv(self, pa, ar):
+		if len(pa) == len(ar):
+			if '' in pa :
+				print("Error : You can't fill a blank name")
+			else:
+				for i,a in enumerate(pa):
+					self.addv(a, ar[i]) 
+					print(f"\"{ar[i]}\" was assigned to ${a}")
+		else:
+			print("Error : You must provide as many names as values")
