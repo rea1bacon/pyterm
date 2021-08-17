@@ -7,6 +7,8 @@
 ### Installation
 
     git clone https://github.com/evilcater/pyterm.git
+    
+    cd pyterm
 
     pip install -r requirements.txt
 
