@@ -10,7 +10,7 @@
 
     pip install -r requirements.txt
 
-You also need python 3.10 to run Pyterm
+You also need python 3.7 to run Pyterm
 
 ### Usage
 
