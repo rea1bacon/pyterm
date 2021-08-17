@@ -1,14 +1,17 @@
 import cmdline
 
-def echo(pa, ar):
-		r = ""
-		print(ar[0])
-		#if ar[0][0] == '$':
-			
+def echo(p, a):
+	if "$" in p: #check if we want to output a variable
+		for i in a:
+			x.retuv([''],[i])
+			return 0
+	else:
+		for i in a:
+			print(i)
 
 
 
 
 x = cmdline.cmd()
-#x.addc("echo",echo,desc="Print a string")
+x.addc("echo",echo,desc="Print a string")
 x.initsession()

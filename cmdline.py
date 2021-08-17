@@ -27,7 +27,7 @@ class cmd:
 			if var in self.locv:
 				print(f'${var} : {self.locv[var]}')
 			else:
-				print(f"Error : variable ${var} not found. Add it ")
+				print(f"Error : variable ${var} not found. Add it with set -{var} \"content\"")
 		else:
 			for i in self.locv:
 				print(f'${i} : {self.locv[i]}')
