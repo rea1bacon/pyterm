@@ -16,6 +16,8 @@ You also need python 3.7 to run Pyterm
 
 ### Usage
 
+To discover the module, you can use the file test.py
+
     import cmdline
 
 Pyterm is very easy to use. You just need a few lines to deploy a cli app.
