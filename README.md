@@ -117,6 +117,47 @@ Every time you define a new function, you need to pass the options p which stand
 	    else:
 		    for i in a:
 			    print(i)
-       
 
+Then we add the function :
 
+	x.addc("echo", echo)
+
+First we definethe keyword, the command that will call the function.
+To the second position, we pass the function called by the command, here, echo.
+
+You can also add a descritpion to the command :
+
+	x.addc("echo",echo,desc="Print a string or a var")
+
+Now we can test it by launching again the script :
+	
+	cli$- echo "Hello world"
+	Hello world
+	cli$- echo "var" -$
+	$var : 123
+	
+### TO-DO
+
+- Throw more errors with description
+
+if we write dumpc "test
+	
+	dumpcmd [''] ['']
+
+Goal :
+
+	Error : while parsing argument dump "test
+					    ^
+- Ability to personnalize colors
+
+- Create a repo with modules
+
+Everybody could write his module with pre-built functions like
+
+	x.import("shell")
+	
+	cli$- ls
+	.git file.txt dir
+	cli$- cd dir
+	cli$dir/- cat test.txt 
+	hello world
