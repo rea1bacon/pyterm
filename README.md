@@ -137,7 +137,7 @@ Then we add the function :
 ```python
 x.addc("echo", echo)
 ```
-First we definethe keyword, the command that will call the function.
+First we define the keyword, the command that will call the function.
 To the second position, we pass the function called by the command, here, echo.
 
 You can also add a descritpion to the command :
