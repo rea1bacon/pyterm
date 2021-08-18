@@ -25,7 +25,7 @@ import cmdline
 Pyterm is very easy to use. You just need a few lines to deploy a cli app.
 
 ```python
-cmd = cmdline.cmd()
+x = cmdline.cmd()
 x.initsession()
 ```
 You have now a interactive shell fully functionnal with some pre-built commands ready to go !
