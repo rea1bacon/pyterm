@@ -153,6 +153,17 @@ Hello world
 cli$- echo "var" -$
 $var : 123
 ```
+
+### Import module
+
+You can import modules with pre-built functions :
+```python
+import cmdline
+x = cmdline.cmd()
+x.importm("module_name")
+x.initsession()
+```
+
 ### TO-DO
 
 - Throw more errors with description
@@ -170,17 +181,4 @@ Error : while parsing argument dump "test
 ```
 - Ability to personnalize colors
 
-- Create a repo with modules
 
-Everybody could write his module with pre-built functions like
-
-```python
-x.import("shell")
-```
-```bash
-cli$- ls
-.git file.txt dir
-cli$- cd dir
-cli$dir/- cat test.txt 
-hello world
-```
