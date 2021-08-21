@@ -1,4 +1,6 @@
-import cmdline
+import cmdline, sys
+
+
 
 def echo(p, a):
 	if "$" in p: #check if we want to output a variable
@@ -11,7 +13,8 @@ def echo(p, a):
 
 
 
-
 x = cmdline.cmd()
+Xsploit = x.importm("Xsploit")
+Xsploit.set_object(x)
 x.addc("echo",echo,desc="Print a string")
 x.initsession()

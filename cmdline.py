@@ -1,15 +1,16 @@
-#!/usr/bin/python3
-#!/usr/bin/py3
 import re
 import datetime
 import pyfiglet
 import colorama
 from termcolor import colored, cprint
+import sys
+import importlib
 
 
 
 class cmd:
-	def __init__(self,title="CLI",desc="cli tool (module by @realbacon)",inp="$- ",name="cli"):
+
+	def __init__(self,title="CLI",desc="cli tool (module by @realbacon)",inp="$>",name="cli"):
 		self.cmd_dic = {}
 		self.locv = {}
 		self.input = str(inp)
@@ -25,16 +26,23 @@ class cmd:
 		if len(a[0]) > 0:
 			var = a[0]
 			if var in self.locv:
+				if "r" in p:
+					return self.locv[var]
 				print(f'${var} : {self.locv[var]}')
 			else:
+				if "r" in p:
+					return None
 				print(f"Error : variable ${var} not found. Add it with set -{var} \"content\"")
 		else:
+			if "r" in p:
+					return True
 			for i in self.locv:
 				print(f'${i} : {self.locv[i]}')
 
 
 	#Init shell
 	def initsession(self):
+		print("Shell is opening", end="\r")
 		colorama.init()
 		date = datetime.datetime.now()
 		ascii_b = pyfiglet.figlet_format(self.title)
@@ -42,7 +50,7 @@ class cmd:
 		print("Start at "+date.strftime('%Y-%m-%d %H:%M'))
 		print("Type 'help' to see a list of commands")
 		self.addc("help",self.printc,"List all available commands")
-		self.addc("exit",self.quit,"Exit the shell")
+		self.addc("exit",self.quit,"Exit the cli")
 		self.addc("dump",self.retuv,"Return the value of all/one variable")
 		self.addc("dumpc",self.dumpcmd,"Return parameters and arguments")
 		self.addc("set",self.setv,desc="Assign a value to a variable")
@@ -101,7 +109,7 @@ class cmd:
 		elif cm[0]in self.cmd_dic:
 			self.cmd_dic[cm[0]][0](para,arg)
 		else:
-			print(f"Error : Command not found '{cm[0]}'. Type help to see a list of all the commands")
+			print(f"Error : Command not found '{cm[0]}'. Type 'help' to see a list of all the commands")
 
 
 	#function for help command
@@ -111,14 +119,14 @@ class cmd:
 			if na  in self.cmd_dic:
 				print(f"- Command : ",end="")
 				cprint(na,'green')    
-				print(f"   Function : {self.cmd_dic[na][0].__name__}()\n    Description : {self.cmd_dic[na][1]}")					
+				print(f"    Function : {self.cmd_dic[na][0].__name__}()\n    Description : {self.cmd_dic[na][1]}")					
 			else:
 				print(f"Error help: Command not found '{na}'.")	
 		else:
 			for i in self.cmd_dic:
 				print(f"- Command : ",end="")
 				cprint(i,'green')
-				print(f"Function : {self.cmd_dic[i][0].__name__}()\n    Description : {self.cmd_dic[i][1]}")
+				print(f"    Function : {self.cmd_dic[i][0].__name__}()\n    Description : {self.cmd_dic[i][1]}")
 	
 	def quit(self,p,a):
 		print('Exiting shell')
@@ -127,6 +135,7 @@ class cmd:
 
 	def dumpcmd(self,p,a):
 		print("dumpcmd",p,a)
+
 
 	def setv(self, pa, ar):
 		if len(pa) == len(ar):
@@ -138,3 +147,12 @@ class cmd:
 					print(f"\"{ar[i]}\" was assigned to ${a}")
 		else:
 			print("Error : You must provide as many names as values")
+
+
+
+	def importm(self,mod):
+		sys.path.insert(1, 'module/'+mod+'/')
+		module = importlib.import_module(mod)
+		return module
+
+
