@@ -5,7 +5,9 @@
      /  \\__ \ |_) | | (_) | | |_
     /_/\_\___/ .__/|_|\___/|_|\__|
              |_|
- # Xsploit 
+!!!This module is under developpement!!!
+
+# Xsploit 
 Xsploit is the first released module for pyterm. It gives you a large number of functions to use pre-built exploits for pentesting ! ( Use it at your own risk )
 
 ## Doc
