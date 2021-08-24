@@ -4,15 +4,15 @@
 # /  \\__ \ |_) | | (_) | | |_
 #/_/\_\___/ .__/|_|\___/|_|\__|
 #         |_|
-
+#module for pyterm
 import re
 from termcolor import colored
 import colorama
 from exploits import *
-
+colorama.init()
 
 def set_object(ob):
-    global x 
+    global x
     x = ob
     global init_inp
     init_inp = x.input
@@ -34,31 +34,36 @@ def use(p,a):
 #function to list all the exploits
 def show(p,a):
     if len(a[0]) > 0:
-        c = [i for i in exploits if re.search(a[0],i)]
+        c = [i for i in exploits if re.search(a[0].upper().strip(),i.upper()) or re.search(a[0].upper().strip(),exploits[i]['Description'].upper())]
         d = c if len(c) > 0 else []
         print(len(d),"exploit(s) found")
         print("-" * 40)
         for i in d:
-            print("-",i)
-        print("-" * 40)
+                a = list(exploits[i].items())
+                print(f"- {a[1][0]} :",colored(f"{a[1][1]}","green"))
+                for p in a[2:]:
+                    print(f"  {p[0]} : {p[1]}")
+                print("-"*40)
     else:
         print("-" * 40)
         for i in exploits:
-            print("-",i)
-        print("-" * 40)
+            a = list(exploits[i].items())
+            print(f"- {a[1][0]} :",colored(f"{a[1][1]}","green"))
+            for p in a[2:]:
+                print(f"  {p[0]} : {p[1]}")
+            print("-"*40)
 
 
 #launch exploit function
 def exploit(p,a):
     if type(x.retuv(['r'],["current_exploit"])) == str:
         try :
-            exploits[x.retuv(['r'],["current_exploit"])]()
+            exploits[x.retuv(['r'],["current_exploit"])]["function"](x)
         except:
             print("Error while launching exploit")
             raise
     else:
         print("You need to select an exploit before running it !")
-
 
 functions = {
 "usex":[use,"Select the exploit to use"],
@@ -66,11 +71,36 @@ functions = {
 "exploitx":[exploit,"Run the exploit selected"]
 }
 
-exploits = {
-"sql_basic_injection":sql_simple_injection,
-"freemarker_RCE":sql_simple_injection,
-"subsearcher":subsearcher
+'''Template :
+,"exploit": {
+'function': fun,
+'name':'exploit',
+'author':'auth',
+'version':'0.0',
+'Description':'desc'
 }
+'''
 
-
-
+exploits = {
+"Padding_Oracle_attack":{
+"function": init_padding_attack,
+"name":"Padding_Oracle_attack",
+'author':'realbacon',
+'version':'1.1',
+'Description':'Padding oracle attack is an attack which uses the padding validation of a cryptographic message to decrypt the ciphertext'
+}
+,"Freemarker_RCE":{
+"function": not_avail,
+"name":"Freemarker_RCE",
+'author':'realbacon',
+'version':'0.0',
+'Description':'Bad character escaping and misconfiguration lead to RCE in Freemarker Webapps'
+}
+,"Subsearcher":{
+"function": subsearcher,
+"name":"Subsearcher",
+'author':'realbacon',
+'version':'1.0',
+'Description':'Directory buster to find hidden files and directorys'
+}
+}

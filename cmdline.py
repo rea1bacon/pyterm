@@ -5,7 +5,10 @@ import colorama
 from termcolor import colored, cprint
 import sys
 import importlib
-
+try:
+	import readline
+except:
+	pass
 
 
 class cmd:
@@ -42,7 +45,6 @@ class cmd:
 
 	#Init shell
 	def initsession(self):
-		print("Shell is opening", end="\r")
 		colorama.init()
 		date = datetime.datetime.now()
 		ascii_b = pyfiglet.figlet_format(self.title)
