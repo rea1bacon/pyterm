@@ -103,4 +103,11 @@ exploits = {
 'version':'1.0',
 'Description':'Directory buster to find hidden files and directorys'
 }
+,"spip_RCE": {
+'function': spip_RCE,
+'name':'spip_RCE',
+'author':'realbacon - vuln by Laluka',
+'version':'1.0',
+'Description':'Vulnerability in oups parameter /ecrire/?exec=article&id_article=1&ajouter=non&tri_liste_aut=statut&deplacer=oui&_oups= leads to php code execution'
+}
 }
