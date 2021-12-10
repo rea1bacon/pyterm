@@ -1,4 +1,4 @@
-# Pyterm
+# Pyterm (in dev)
 
 ## Easily create command line tools with python 
 
